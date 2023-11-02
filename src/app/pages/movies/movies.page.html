@@ -7,20 +7,38 @@
 <ion-content [fullscreen]="true">
   <ion-list>
     <ion-card onclick="redirect()" button *ngFor="let item of movies">
-      <img class="imageCard" [src]="imageUrl + '/w92' + item.poster_path">
+      <img class="imageCard" [src]="imageUrl + '/w92' + item.poster_path" />
       <ion-card-header>
         <ion-card-title>{{item.title}}</ion-card-title>
         <ion-card-subtitle>{{item.release_date | date:'y'}}</ion-card-subtitle>
       </ion-card-header>
-    
+
       <ion-card-content>
-      {{item.overview}}
+        {{item.overview.substring(0,70) + '...'}}
       </ion-card-content>
     </ion-card>
   </ion-list>
   <ion-infinite-scroll (ionInfinite)="loadMore($event)">
-   <ion-infinite-scroll-content loadingSpinner="'bubbles" loadingText="'Loading more data">
-
-   </ion-infinite-scroll-content>
-</ion-infinite-scroll>
+    <ion-infinite-scroll-content
+      loadingSpinner="'bubbles"
+      loadingText="'Loading more data"
+    >
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>
+<ion-footer [translucent]="true">
+  <ion-toolbar>
+    <ion-tabs>
+      <ion-tab-bar slot="bottom">
+        <ion-tab-button tab="home">
+          <ion-icon name="person-circle"></ion-icon>
+          Account
+        </ion-tab-button>
+        <ion-tab-button tab="search">
+          <ion-icon name="search"></ion-icon>
+          Search
+        </ion-tab-button>
+      </ion-tab-bar>
+    </ion-tabs>
+  </ion-toolbar>
+</ion-footer>

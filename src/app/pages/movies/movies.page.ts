@@ -24,7 +24,7 @@ export class MoviesPage implements OnInit {
   async loadMovies(event? : InfiniteScrollCustomEvent) {
 
     const loading = await this.loadingCtrl.create({
-      message:'Loading..',
+      message:'Loading...',
       spinner:'bubbles'
     });
     await loading.present()
