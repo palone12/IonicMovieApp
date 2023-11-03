@@ -24,3 +24,23 @@
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
+.flexCenter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    flex-direction: column;
+    position: fixed;
+    padding-left: 25px;
+}
+.outerButtonContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.buttonContainer{
+    display: flex;
+    gap: 40px;
+    padding: 5px;
+    justify-content: space-between;
+}
