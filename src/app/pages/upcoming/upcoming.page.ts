@@ -1,52 +1,44 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { InfiniteScrollCustomEvent, LoadingController } from '@ionic/angular';
 import { MovieService } from 'src/app/services/movie.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-movies',
-  templateUrl: './movies.page.html',
-  styleUrls: ['./movies.page.scss'],
+  selector: 'app-upcoming',
+  templateUrl: './upcoming.page.html',
+  styleUrls: ['./upcoming.page.scss'],
 })
-export class MoviesPage implements OnInit {
-  movies: any = [];
+export class UpcomingPage implements OnInit {
   upcoming: any = [];
   currentPage = 1;
   imageUrl = environment.images;
-
   constructor(
     private movieService: MovieService,
-    private loadingCtrl: LoadingController,
-    private router: Router
+    private loadingCtrl: LoadingController
   ) {}
 
   ngOnInit() {
-    this.loadMovies();
+    this.getUpcoming();
   }
-
-  async loadMovies(event?: InfiniteScrollCustomEvent) {
+  async getUpcoming(event?: InfiniteScrollCustomEvent) {
     const loading = await this.loadingCtrl.create({
       message: 'Loading...',
       spinner: 'bubbles',
     });
     await loading.present();
 
-    this.movieService.getTopRatedMovies().subscribe((res) => {
+    this.movieService.getUpcomingMovies().subscribe((res) => {
       loading.dismiss();
-      this.movies.push(...res.results);
+      this.upcoming.push(...res.results);
       event?.target.complete();
       if (event) {
         event.target.disabled = res.total_pages === this.currentPage;
       }
     });
   }
-  loadMore(event: InfiniteScrollCustomEvent) {
-    this.currentPage++;
-    this.loadMovies(event);
-  }
 
-  redirect() {
-    this.router.navigate(['movies', 'details']);
+  loadMoreUpcoming(event: InfiniteScrollCustomEvent) {
+    this.currentPage++;
+    this.getUpcoming(event);
   }
 }

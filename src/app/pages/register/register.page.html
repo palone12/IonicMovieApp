@@ -1,7 +1,31 @@
-<!-- signup.page.html -->
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Registration
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
 <ion-content>
-  <ion-input [(ngModel)]="email" type="email" placeholder="Email"></ion-input>
-  <ion-input [(ngModel)]="password" type="password" placeholder="Password"></ion-input>
-  <ion-button (click)="signUp()">Sign Up</ion-button>
-  <ion-text>{{error}}</ion-text>
+  <ion-card class="registerPage">
+    <ion-card-title>
+      Sign Up
+    </ion-card-title>
+    <ion-card-content class="fieldsRegister">
+      <ion-item>
+        <ion-label position="floating">Email</ion-label>
+        <ion-input type="email" [(ngModel)]="email"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Password</ion-label>
+        <ion-input type="password" [(ngModel)]="password"></ion-input>
+      </ion-item>
+    </ion-card-content>
+    <div class="buttonContainer">
+      <ion-button color="success" (click)="signUp()">Register</ion-button>
+      <ion-button color="warning" [routerLink]="['/login']">Go to Login</ion-button>
+    </div>
+
+  </ion-card>
+
 </ion-content>

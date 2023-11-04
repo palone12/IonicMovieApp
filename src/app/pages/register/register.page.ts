@@ -37,7 +37,7 @@ export class RegisterPage {
     await loading.dismiss();
 
     if (user !== 'Error In Registration') {
-      console.log(user);
+      this.showAlert('Registration  Successful', 'Explore...');
       this.router.navigateByUrl('/movies', { replaceUrl: true });
     } else {
       this.showAlert('Registration failed', 'Invalid Email');

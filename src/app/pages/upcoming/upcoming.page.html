@@ -1,13 +1,16 @@
 <ion-header [translucent]="true">
-  <ion-toolbar color="">
-    <ion-title>Trending Movies</ion-title>
+  <ion-toolbar>
+    <ion-title>Upcoming Movies</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/movies"></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-list>
-    <ion-card [routerLink]="[item.id]" button *ngFor="let item of movies">
-      <img class="imageCard" [src]="imageUrl + '/w300' + item.poster_path" />
+    <ion-card [routerLink]="['/movies',item.id]" button *ngFor="let item of upcoming">
+      <img class="imageCard" [src]="imageUrl + '/w400' + item.poster_path" />
       <ion-card-header>
         <ion-card-title>{{item.title}}</ion-card-title>
         <ion-card-subtitle>{{item.release_date | date:'y'}}</ion-card-subtitle>
@@ -18,13 +21,8 @@
       </ion-card-content>
     </ion-card>
   </ion-list>
-  <ion-infinite-scroll (ionInfinite)="loadMore($event)">
+  <ion-infinite-scroll (ionInfinite)="loadMoreUpcoming($event)">
     <ion-infinite-scroll-content loadingSpinner="'bubbles" loadingText="'Loading more data">
     </ion-infinite-scroll-content>
   </ion-infinite-scroll>
 </ion-content>
-<ion-footer [translucent]="true">
-  <ion-button expand="full" class="upcoming" color="warning" routerLink="/upcoming">
-    <ion-icon slot="start" name="videocam-outline"></ion-icon>
-    Upcoming</ion-button>
-</ion-footer>

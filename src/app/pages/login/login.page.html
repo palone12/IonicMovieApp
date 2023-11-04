@@ -1,6 +1,30 @@
-<!-- login.page.html -->
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Sign In
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
 <ion-content>
-  <ion-input [(ngModel)]="email" type="email" placeholder="Email"></ion-input>
-  <ion-input [(ngModel)]="password" type="password" placeholder="Password"></ion-input>
-  <ion-button (click)="login()">Login</ion-button>
+  <ion-card class="loginPage">
+    <ion-card-title>
+      Log In
+    </ion-card-title>
+    <ion-card-content>
+      <ion-item>
+        <ion-label position="floating">Email</ion-label>
+        <ion-input type="email" [(ngModel)]="email"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Password</ion-label>
+        <ion-input type="password" [(ngModel)]="password"></ion-input>
+      </ion-item>
+    </ion-card-content>
+    <div class="buttonContainer">
+      <ion-button color="success" (click)="login()">Login</ion-button>
+      <ion-button color="warning" [routerLink]="['/register']">Register</ion-button>
+    </div>
+  </ion-card>
+
 </ion-content>

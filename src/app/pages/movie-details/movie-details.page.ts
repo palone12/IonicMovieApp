@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MovieService } from 'src/app/services/movie.service';
 import { environment } from 'src/environments/environment';
+import { Browser } from '@capacitor/browser';
 
 @Component({
   selector: 'app-movie-details',
@@ -9,21 +10,20 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./movie-details.page.scss'],
 })
 export class MovieDetailsPage implements OnInit {
-  movie : any  = null;
-  imageUrl = environment.images
-  constructor(private route : ActivatedRoute, private movieService : MovieService) { }
+  movie: any = null;
+  imageUrl = environment.images;
+  constructor(
+    private route: ActivatedRoute,
+    private movieService: MovieService
+  ) {}
 
   ngOnInit() {
-    const id:any = this.route.snapshot.paramMap.get('id');
-    console.log(id)
-    this.movieService.getMovieDetails(id).subscribe((res)=> {
-      console.log(res);
-      this.movie=res
-    })
+    const id: any = this.route.snapshot.paramMap.get('id');
+    this.movieService.getMovieDetails(id).subscribe((res) => {
+      this.movie = res;
+    });
   }
-
-  openHomepage() {
-    window.open(this.movie.homepage)
-  }
-
+  openCapacitorSite = async () => {
+    await Browser.open({ url: this.movie.homepage });
+  };
 }
