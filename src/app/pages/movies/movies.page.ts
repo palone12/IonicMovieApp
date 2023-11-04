@@ -11,7 +11,6 @@ import { environment } from 'src/environments/environment';
 })
 export class MoviesPage implements OnInit {
   movies: any = [];
-  upcoming: any = [];
   currentPage = 1;
   imageUrl = environment.images;
 
@@ -24,7 +23,10 @@ export class MoviesPage implements OnInit {
   ngOnInit() {
     this.loadMovies();
   }
-
+  loadMore(event: InfiniteScrollCustomEvent) {
+    this.currentPage++;
+    this.loadMovies(event);
+  }
   async loadMovies(event?: InfiniteScrollCustomEvent) {
     const loading = await this.loadingCtrl.create({
       message: 'Loading...',
@@ -32,7 +34,7 @@ export class MoviesPage implements OnInit {
     });
     await loading.present();
 
-    this.movieService.getTopRatedMovies().subscribe((res) => {
+    this.movieService.getTopRatedMovies(this.currentPage).subscribe((res) => {
       loading.dismiss();
       this.movies.push(...res.results);
       event?.target.complete();
@@ -40,10 +42,6 @@ export class MoviesPage implements OnInit {
         event.target.disabled = res.total_pages === this.currentPage;
       }
     });
-  }
-  loadMore(event: InfiniteScrollCustomEvent) {
-    this.currentPage++;
-    this.loadMovies(event);
   }
 
   redirect() {

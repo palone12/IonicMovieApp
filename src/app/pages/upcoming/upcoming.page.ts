@@ -27,7 +27,7 @@ export class UpcomingPage implements OnInit {
     });
     await loading.present();
 
-    this.movieService.getUpcomingMovies().subscribe((res) => {
+    this.movieService.getUpcomingMovies(this.currentPage).subscribe((res) => {
       loading.dismiss();
       this.upcoming.push(...res.results);
       event?.target.complete();
