@@ -35,7 +35,7 @@ export class LoginPage {
     const user = await this.authService.login(this.email, this.password);
     await loading.dismiss();
 
-    if (user !== 'Error In Registration') {
+    if (user !== 'Error In Login') {
       this.router.navigateByUrl('/movies', { replaceUrl: true });
     } else {
       this.showAlert('Login failed', 'Please try again!');

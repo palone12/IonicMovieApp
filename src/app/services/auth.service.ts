@@ -29,7 +29,7 @@ export class AuthService {
       const user = await signInWithEmailAndPassword(this.auth, email, password);
       return user;
     } catch (error) {
-      return 'Error In Registration';
+      return 'Error In Login';
     }
   }
 
